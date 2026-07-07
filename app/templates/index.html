@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+    
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-header" style="margin-top: 0;">
+                <h1>Our Inventory <small>Discover our collection of premium vehicles</small></h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- TODO sort dropdown - as required by the specification -->
+    <div class="row">
+        <div class="dropdown home-dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown">Sort by
+            <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{url_for('galleryPage', sort='name')}}">Name</a></li>
+                <li><a class="dropdown-item" href="{{url_for('galleryPage', sort='price_asc')}}">Price (low -> high)</a></li>
+                <li><a class="dropdown-item" href="{{url_for('galleryPage', sort='emissions_asc')}}">Emissions (low -> high)</a></li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    <div class="row">
+        {% for car in cars %}
+        <div class="col-xs-12 col-sm-6 col-md-4" style="margin-bottom: 20px;">
+            <div class="panel panel-default">
+                <div class="panel-body">
+
+
+
+
+
+                    <div class="gallery-image-wrap" data-description="{{ car.description|e }}">
+                        <a href="{{ url_for('singleProductPage', carID=car.id) }}">
+                            <img src="{{ url_for('static', filename=car.imglink[0]) }}" class="img-responsive img-thumbnail" 
+                                                alt="{{ car.name }}" style="width: 100%; height: 200px; object-fit: cover;">
+                        </a>
+                        <div class="gallery-description" aria-hidden="true"></div>
+                    </div>
+                    
+
+
+
+
+
+
+
+                    
+                    <div class="title-row">
+                        <h4 class="car-title">{{ car.name }}</h4>
+                        <a href="{{url_for('add_to_basket', carID=car.id)}}" class="btn btn-default btn-favourite" title="Add to basket">
+                            <!--TODO: Display heart of different colours depending on whether its in basket or not-->
+                            
+                            {% if car.id in basket_car_ids %}
+                                <span class="glyphicon glyphicon-heart" style="color: red;"></span>
+                            {% else %}
+                                <span class="glyphicon glyphicon-heart" style="color: gray;"></span>
+                            {% endif %}
+                        </a>
+                    </div>
+                   
+                    <p>
+                        <span class="label label-success">{{car.co2_emissions}} g/km</span> 
+                    </p>
+                    <p class="lead" style="margin-bottom: 10px;">£{{ car.price|currency }}</p>
+                    
+                    <a href="{{ url_for('singleProductPage', carID=car.id) }}" class="btn btn-primary btn-block">View Details</a>
+
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="col-xs-12">
+            <div class="jumbotron text-center">
+                <h2>No vehicles available</h2>
+                <p>Check back later for new inventory.</p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% if cars|length > 6 %}
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            <ul class="pagination">
+                <li class="disabled"><a href="#">Previous</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">Next</a></li>
+            </ul>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/index-hover.js') }}"></script>
+{% endblock %}

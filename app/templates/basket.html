@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="content">
+    <div class="row basket_table">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Car</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iteration used to make the program modular -->
+                {% for item in items %}
+                <tr id="item-row-{{ item.id }}">
+                    <td>
+                        <strong>{{ item.car.name }}</strong><br>
+                        <small class="text-muted">{{ item.car.year }}</small>
+                    </td>
+                    <td>£{{ item.car.price|currency }}</td>
+                    <td>
+                        
+                        {% if item.car %}
+                            <p>1</p>
+                        {% else %}
+                        
+                        <p>Not a Car</p>
+                        {% endif %}
+
+                    </td>
+                    <td>£{{ item.car.price|currency }}</td>
+                    <td>
+                        <!-- calling add to basket removes the item as it is already in basket -->
+                        <a href="{{url_for('add_to_basket', carID=item.car.id)}}" class="btn btn-xs btn-danger" onclick="return confirm('Remove this item?');">
+                            <span class="glyphicon glyphicon-trash"></span> Remove
+                        </a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5" class="text-center text-muted">
+                        Your basket is empty
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot>
+                <tr class="active">
+                    <td colspan="3" class="text-right"><strong>Total:</strong></td>
+                    <td><strong>£{{ total|currency }}</strong></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    
+    <div class="basket-form">
+        <!--Take user to checkout-->
+        {% if checkout_possible %}
+        <a href="{{url_for('checkout', BasketID=basket.id)}}" class="btn btn-primary btn-block">Go to Checkout</a>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock %}

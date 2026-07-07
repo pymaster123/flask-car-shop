@@ -14,3 +14,5 @@ Additionally, I used bootstrap, which was also something that I had never done p
 The project also let me focus on databases and explore how these interact with real sites. 
 
 Overall, building this simple, entry level website as my first web apps coursework project was a positive experience.  
+
+This project was deployed with openshift. 

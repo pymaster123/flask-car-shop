@@ -1,0 +1,57 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+	Car Shop
+{% endblock %}
+
+{% block styles %}
+	
+{{ super() }}
+<head>
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+{% endblock %}
+
+
+{% block navbar %}
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="{{ url_for('galleryPage') }}">Car Shop</a>
+			</div>
+
+			<div class="collapse navbar-collapse" id="main-navbar">
+				<ul class="nav navbar-nav">
+					<li class="{% if request.endpoint == 'galleryPage' %}active{% endif %}"> <!-- This line makes the button shaded if were in the home page -->
+						<a href="{{ url_for('galleryPage') }}">Home</a>
+					</li>
+					<li class="{% if request.endpoint == 'tyresPage' %}active{% endif %}">
+						<a href="{{ url_for('tyresPage') }}" >Tyres</a> <!-- Might delete this if I decide not to sell tyres -->
+					</li>
+					<li class="{% if request.endpoint == 'partnersPage' %}active{% endif %}">
+						<a href="{{ url_for('partnersPage') }}" >Citations</a> 
+					</li>
+					<li class="{% if request.endpoint == 'aboutPage' %}active{% endif %}">
+						<a href="{{ url_for('aboutPage') }}" >About Us</a> 
+					</li>
+				</ul>
+
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<p class="navbar-btn">
+							<a href="{{ url_for('basketPage') }}" class="btn btn-primary btn-sm">Basket</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+{% endblock %}

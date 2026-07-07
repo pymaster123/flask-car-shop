@@ -1,0 +1,106 @@
+/* Front Page Styling */
+.title-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+/* Used with AJAX to show descriptions in gallery page */
+.gallery-image-wrap {
+	position: relative;
+	display: block;
+	overflow: hidden;
+	border-radius: 4px;
+}
+
+.gallery-image-wrap a {
+	display: block;
+}
+
+.gallery-description {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 15px;
+	background: rgba(0, 0, 0, 0.72);
+	color: #fff;
+	font-size: 15px;
+	line-height: 1.4;
+	text-align: center;
+	opacity: 0;
+	transition: opacity 0.2s ease-in-out; /*So you can still see the product in the back*/
+	pointer-events: none;
+	border-radius: 4px;
+}
+
+.gallery-description.is-visible {
+	opacity: 1;
+}
+
+.car-title {
+	margin: 0;
+}
+
+.btn.btn-favourite {
+	width: 42px;
+	height: 42px;
+	min-width: 42px;
+	padding: 0;
+	border-radius: 50%;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	line-height: 1;
+}
+
+.home-dropdown{
+	margin: 15px;
+	float: right;
+}
+
+/* Single Car Page */
+.main_description{
+	font-size: large;
+	margin-top: 15px;
+}
+
+.btn.single-car-favourite{
+	margin: 10px;
+	display: block;
+	width: 100%;
+}
+
+/* Car Sliding Gallery Styling*/
+.car-gallery .item {
+	height: 420px;
+	background-color: #f3f3f3;
+	overflow: hidden;
+}
+
+.car-gallery .item img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+@media (max-width: 768px) {
+	.car-gallery .item {
+		height: 280px;
+	}
+}
+
+
+/* Basket page  */
+.basket_table{
+	margin: 15px;
+}
+
+.basket-form{
+	padding: 65px;
+}
+
